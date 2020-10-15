@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { forEach } from 'lodash';
+import React, { useEffect, useState } from 'react';
 
 function Counter() {
   const [count, setCount] = useState(0);
@@ -11,20 +12,19 @@ function Counter() {
     setCount(prevCount => prevCount - 1);
   };
 
-  const submit = (props) => {
-    fetch('url',{
-      method: 'post',
-      body:JSON.stringify(
-        props.state
-      ),
+  const handleSubmit = (props) => {
+    fetch('http://localhost:8000/api', {
+      method: "POST",
+      body: JSON.stringify(props.state),
       headers: {
-        'Accept':'application/json',
-        'Content-Type':'application/json',
-      }
-    }).then(function(response){
-      response.json().then(function(resp){
-        console.log(resp)
-      })
+        'Accept': 'application/php',
+        'Content-Type': 'application/php'
+      },
+      }).then(
+      (response) => (response.json())
+      ).then((response)=> {
+          forEach (response)
+          return response.map
     })
   }
 
@@ -34,10 +34,8 @@ function Counter() {
         <button onClick={handleAddition}>+</button>
         <button onClick={handleSubtraction}>-</button>
       </div>
-      <form>
         <h4>The count is {count}</h4>
-        <button onClick={submit(count)}>Send it!</button>
-      </form>
+        <button onClick={handleSubmit(count)}>Send it!</button>
     </div>
   )
 }

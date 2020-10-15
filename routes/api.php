@@ -17,7 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/test', function () {
-    return ['movie' => 'end game'];
-});
+/* 
+Route::post('/api/count', "App\Http\Controllers\CountController@create"); */
